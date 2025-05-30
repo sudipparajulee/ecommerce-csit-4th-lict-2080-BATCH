@@ -22,7 +22,7 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'order' => 'required',
+            'order' => 'required|numeric',
         ]);
         Category::create($data);
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
