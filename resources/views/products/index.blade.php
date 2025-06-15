@@ -16,18 +16,22 @@
             <th class="p-2 border border-gray-300">Category</th>
             <th class="p-2 border border-gray-300">Action</th>
         </tr>
+        @foreach($products as $product)
         <tr>
-            <td class="p-2 border">Picture</td>
-            <td class="p-2 border">My product</td>
-            <td class="p-2 border">600</td>
-            <td class="p-2 border">500</td>
-            <td class="p-2 border">this is descirption</td>
-            <td class="p-2 border">5</td>
-            <td class="p-2 border">Electronics</td>
+            <td class="p-2 border">
+                <img src="{{asset('images/products/'.$product->photopath)}}" alt="" class="h-16 hover:rotate-45 transition-all duration-300">
+            </td>
+            <td class="p-2 border">{{$product->name}}</td>
+            <td class="p-2 border">{{$product->price}}</td>
+            <td class="p-2 border">{{$product->discounted_price ?? '--'}}</td>
+            <td class="p-2 border">{{$product->description}}</td>
+            <td class="p-2 border">{{$product->stock}}</td>
+            <td class="p-2 border">{{$product->category->name}}</td>
             <td class="p-2 border text-center">
                 <a href="" class="bg-blue-600 px-2 py-1 rounded text-white">Edit</a>
                 <a href="" class="bg-red-600 px-2 py-1 rounded text-white">Delete</a>
             </td>
         </tr>
-
+        @endforeach
+    </table>
 @endsection
