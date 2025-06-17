@@ -28,7 +28,7 @@
             <td class="p-2 border">{{$product->stock}}</td>
             <td class="p-2 border">{{$product->category->name}}</td>
             <td class="p-2 border text-center">
-                <a href="" class="bg-blue-600 px-2 py-1 rounded text-white">Edit</a>
+                <a href="{{route('products.edit',$product->id)}}" class="bg-blue-600 px-2 py-1 rounded text-white">Edit</a>
                 <a href="" class="bg-red-600 px-2 py-1 rounded text-white">Delete</a>
             </td>
         </tr>
