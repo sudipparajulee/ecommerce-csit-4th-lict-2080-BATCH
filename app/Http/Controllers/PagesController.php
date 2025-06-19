@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
     public function index()
     {
-        $name = 'John Doe';
-        $age = 30;
-        return view('welcome', compact('name', 'age'));
+        $latestproducts = Product::latest()->take(4)->get();
+        return view('welcome', compact('latestproducts'));
     }
 }
