@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[PagesController::class, 'index']);
+Route::get('/viewproduct/{id}', [PagesController::class, 'viewproduct'])->name('viewproduct');
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
