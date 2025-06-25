@@ -11,14 +11,29 @@
     @php
         $categories = \App\Models\Category::orderBy('order', 'asc')->get();
     @endphp
+    <div class="bg-red-500 flex justify-end gap-4 px-12 py-2 text-white text-xs">
+        @auth
+            <p>HI, {{auth()->user()->name}}</p>
+        @endauth
+        <a href="">My Cart</a>
+        <a href="">My Orders</a>
+        @auth
+            <form action="{{route('logout')}}" method="POST">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        @else
+            <a href="{{route('login')}}">Login</a>
+        @endauth
+
+    </div>
     <nav class="flex justify-between items-center bg-blue-600 py-3 px-12 text-white">
         <h2 class="font-bold text-xl">LOGO</h2>
         <div class="flex gap-4">
             <a href="/">Home</a>
             @foreach ($categories as $category)
-                <a href="">{{$category->name}}</a>
+                <a href="{{route('categoryproducts',$category->id)}}">{{$category->name}}</a>
             @endforeach
-            <a href="/login">Login</a>
         </div>
     </nav>
     @yield('content')

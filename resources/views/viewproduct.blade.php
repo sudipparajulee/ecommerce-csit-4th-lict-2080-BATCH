@@ -32,4 +32,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let quantity = document.getElementById('quantity');
+        function increment(){
+            let currentValue = parseInt(quantity.value);
+            if (currentValue < {{$product->stock}}) {
+                quantity.value = currentValue + 1;
+            }
+        }
+        function decrement(){
+            let currentValue = parseInt(quantity.value);
+            if (currentValue > 1) {
+                quantity.value = currentValue - 1;
+            }
+        }
+    </script>
 @endsection
