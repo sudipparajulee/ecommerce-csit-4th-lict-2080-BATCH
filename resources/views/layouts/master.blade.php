@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+    @include('layouts.alert')
     @php
         $categories = \App\Models\Category::orderBy('order', 'asc')->get();
     @endphp
