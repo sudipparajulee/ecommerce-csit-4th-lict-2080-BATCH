@@ -16,7 +16,7 @@
         @auth
             <p>HI, {{auth()->user()->name}}</p>
         @endauth
-        <a href="">My Cart</a>
+        <a href="{{route('mycart')}}">My Cart</a>
         <a href="">My Orders</a>
         @auth
             <form action="{{route('logout')}}" method="POST">
