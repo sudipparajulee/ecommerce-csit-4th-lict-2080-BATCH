@@ -25,7 +25,7 @@
                             </div>
                             </a>
                             <div class="flex flex-col gap-2">
-                                <a href="" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Checkout</a>
+                                <a href="{{route('checkout',$cart->id)}}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Checkout</a>
                                 <form action="{{route('cart.destroy',$cart->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')

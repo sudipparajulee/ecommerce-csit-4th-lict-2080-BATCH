@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
     Route::get('/mycart', [CartController::class, 'mycart'])->name('mycart');
     Route::delete('/cart/{id}/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/checkout/{cartid}', [PagesController::class, 'checkout'])->name('checkout');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'isadmin'])->name('dashboard');
