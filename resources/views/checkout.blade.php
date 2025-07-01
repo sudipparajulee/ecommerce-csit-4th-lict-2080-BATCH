@@ -21,7 +21,11 @@
                             </div>
                             </a>
                             <div class="flex flex-col gap-2">
-                                <a href="" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Cash on Delivery</a>
+                                <form action="{{route('order.store')}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="cartid" value="{{$cart->id}}">
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Cash on Delivery</button>
+                                </form>
                                 <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
                                 <input type="hidden" id="amount" name="amount" value="100" required>
                                 <input type="hidden" id="tax_amount" name="tax_amount" value ="0" required>
