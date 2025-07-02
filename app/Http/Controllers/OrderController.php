@@ -25,4 +25,18 @@ class OrderController extends Controller
         $cart->delete();
         return redirect()->route('mycart')->with('success', 'Order placed successfully');
     }
+
+    public function index()
+    {
+        $orders = Order::latest()->get();
+        return view('orders.index', compact('orders'));
+    }
+
+    public function updateStatus($orderid, $status)
+    {
+        $order = Order::find($orderid);
+        $order->status = $status;
+        $order->save();
+        return redirect()->back()->with('success', 'Order status updated successfully');
+    }
 }

@@ -23,7 +23,7 @@
                     <a href="/dashboard" class="block pl-3 py-2 hover:bg-amber-600 font-bold text-lg border-b">Dashboard</a>
                     <a href="{{route('categories.index')}}" class="block pl-3 py-2 hover:bg-amber-600 font-bold text-lg border-b">Categories</a>
                     <a href="{{route('products.index')}}" class="block pl-3 py-2 hover:bg-amber-600 font-bold text-lg border-b">Products</a>
-                    <a href="" class="block pl-3 py-2 hover:bg-amber-600 font-bold text-lg border-b">Orders</a>
+                    <a href="{{route('orders.index')}}" class="block pl-3 py-2 hover:bg-amber-600 font-bold text-lg border-b">Orders</a>
                     <a href="" class="block pl-3 py-2 hover:bg-amber-600 font-bold text-lg border-b">Users</a>
                     <form action="{{route('logout')}}" method="POST" class="block pl-3 py-2 hover:bg-amber-600 font-bold text-lg border-b">
                         @csrf
