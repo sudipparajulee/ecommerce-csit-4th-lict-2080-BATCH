@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function(){
 
     //Order
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/order/store-esewa/{cartid}', [OrderController::class, 'storeEsewa'])->name('order.esewa');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'isadmin'])->name('dashboard');
@@ -42,6 +43,7 @@ Route::middleware(['auth', 'isadmin'])->group(function () {
 
     //Order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{orderid}/status/{status}', [OrderController::class, 'updateStatus'])->name('orders.status');
 });
 
 Route::middleware('auth')->group(function () {

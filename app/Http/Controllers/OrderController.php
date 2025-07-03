@@ -26,6 +26,13 @@ class OrderController extends Controller
         return redirect()->route('mycart')->with('success', 'Order placed successfully');
     }
 
+    public function storeEsewa(Request $request, $cartid)
+    {
+        $data = $request->data;
+        $data = base64_decode($data);
+        dd($data);
+    }
+
     public function index()
     {
         $orders = Order::latest()->get();
@@ -35,7 +42,7 @@ class OrderController extends Controller
     public function updateStatus($orderid, $status)
     {
         $order = Order::find($orderid);
-        $order->status = $status;
+        $order->order_status = $status;
         $order->save();
         return redirect()->back()->with('success', 'Order status updated successfully');
     }

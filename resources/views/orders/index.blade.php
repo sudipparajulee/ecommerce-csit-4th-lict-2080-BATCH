@@ -34,10 +34,10 @@
             <td class="p-2 border">{{ $order->payment_status }}</td>
             <td class="p-2 border">{{ $order->order_status }}</td>
             <td class="p-2 border flex flex-wrap gap-2 min-w-48">
-                <a href="" class="px-1 bg-blue-600 text-white">Pe</a>
-                <a href="" class="px-1 bg-yellow-600 text-white">Pr</a>
-                <a href="" class="px-1 bg-green-600 text-white">De</a>
-                <a href="" class="px-1 bg-red-600 text-white">Ca</a>
+                <a href="{{route('orders.status',[$order->id,'Pending'])}}" class="px-1 bg-blue-600 text-white">Pe</a>
+                <a href="{{route('orders.status',[$order->id,'Processing'])}}" class="px-1 bg-yellow-600 text-white">Pr</a>
+                <a href="{{route('orders.status',[$order->id,'Delivered'])}}" class="px-1 bg-green-600 text-white">De</a>
+                <a href="{{route('orders.status',[$order->id,'Cancelled'])}}" class="px-1 bg-red-600 text-white">Ca</a>
             </td>
         </tr>
         @endforeach
