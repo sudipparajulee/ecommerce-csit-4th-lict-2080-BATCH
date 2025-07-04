@@ -13,6 +13,7 @@
             <div class="mb-6">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                 <input type="password" name="password" id="password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                <a href="{{ route('password.request') }}" class="text-sm text-blue-600 hover:text-blue-800 mt-2 block text-right">Forgot your password?</a>
             </div>
             <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200">Login</button>
         </form>
