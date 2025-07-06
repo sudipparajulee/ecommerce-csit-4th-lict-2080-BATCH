@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -21,8 +22,9 @@ class OrderController extends Controller
             'address' => 'Chitwan',
             'phone' => '89897',
         ];
-        Order::create($data);
+        $order = Order::create($data);
         $cart->delete();
+        $this->sendNewOrderEmail($order->id);
         return redirect()->route('mycart')->with('success', 'Order placed successfully');
     }
 
@@ -45,8 +47,9 @@ class OrderController extends Controller
                 'payment_method' => 'eSewa',
                 'payment_status' => 'Paid',
             ];
-            Order::create($orderData);
+            $order = Order::create($orderData);
             $cart->delete();
+            $this->sendNewOrderEmail($order->id);
             return redirect()->route('mycart')->with('success', 'Order placed successfully');
         } else {
             return redirect()->route('mycart')->with('success', 'Something went wrong');
@@ -65,6 +68,35 @@ class OrderController extends Controller
         $order->payment_status = $status == 'Delivered' ? 'Paid' : 'Pending';
         $order->order_status = $status;
         $order->save();
+        //send email notification
+        $this->sendEmail($orderid);
         return redirect()->back()->with('success', 'Order status updated successfully');
+    }
+
+    public function sendEmail($orderid)
+    {
+        $order = Order::find($orderid);
+        $data = [
+            'name' => $order->name,
+            'status' => $order->order_status,
+            'price' => $order->price * $order->quantity,
+        ];
+        Mail::send('emails.orderstatus', $data, function($message) use ($order){
+            $message->to($order->user->email)
+                    ->subject('Order Status Update Notification');
+        });
+    }
+
+    public function sendNewOrderEmail($orderid)
+    {
+        $order = Order::find($orderid);
+        $data = [
+            'name' => $order->name,
+            'price' => $order->price * $order->quantity,
+        ];
+        Mail::send('emails.neworder', $data, function($message) use ($order){
+            $message->to($order->user->email)
+                    ->subject('New Order Notification');
+        });
     }
 }
