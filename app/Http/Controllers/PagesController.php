@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -32,5 +33,12 @@ class PagesController extends Controller
     {
         $cart = Cart::findOrFail($cartid);
         return view('checkout', compact('cart'));
+    }
+
+
+    public function myorder()
+    {
+        $orders = Order::where('user_id', auth()->id())->latest()->get();
+        return view('myorders', compact('orders'));
     }
 }

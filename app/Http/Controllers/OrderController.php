@@ -99,4 +99,14 @@ class OrderController extends Controller
                     ->subject('New Order Notification');
         });
     }
+
+    public function cancelorder(Request $request, $orderid)
+    {
+        $order = Order::where('id', $orderid)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+        $order->order_status = 'Cancelled';
+        $order->save();
+        return redirect()->route('myorders')->with('success', 'Order cancelled successfully');
+    }
 }

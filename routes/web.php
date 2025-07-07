@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function(){
     //Order
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
     Route::get('/order/store-esewa/{cartid}', [OrderController::class, 'storeEsewa'])->name('order.esewa');
+
+    Route::get('/myorders', [PagesController::class, 'myorder'])->name('myorders');
+    Route::post('/order/cancel/{orderid}', [OrderController::class, 'cancelorder'])->name('order.cancel');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'isadmin'])->name('dashboard');

@@ -17,7 +17,7 @@
             <p>HI, {{auth()->user()->name}}</p>
         @endauth
         <a href="{{route('mycart')}}">My Cart</a>
-        <a href="">My Orders</a>
+        <a href="{{route('myorders')}}">My Orders</a>
         @auth
             <form action="{{route('logout')}}" method="POST">
                 @csrf
