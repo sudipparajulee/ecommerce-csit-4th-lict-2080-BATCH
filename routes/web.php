@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[PagesController::class, 'index']);
 Route::get('/viewproduct/{id}', [PagesController::class, 'viewproduct'])->name('viewproduct');
 Route::get('/categoryproducts/{id}', [PagesController::class, 'categoryproducts'])->name('categoryproducts');
+Route::get('/search', [PagesController::class, 'search'])->name('search');
 
 Route::middleware('auth')->group(function(){
     Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');

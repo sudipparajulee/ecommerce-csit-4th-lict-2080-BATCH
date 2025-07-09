@@ -30,6 +30,10 @@
     </div>
     <nav class="flex justify-between items-center bg-blue-600 py-3 px-12 text-white">
         <h2 class="font-bold text-xl">LOGO</h2>
+        <form action="{{route('search')}}" method="GET">
+            <input type="search" minlength="2" required name="search" value="{{request('search')}}" placeholder="Search products..." class="px-4 py-2 w-72 text-black rounded">
+            <button type="submit" class="bg-white text-blue-600 px-4 py-2 rounded">Search</button>
+        </form>
         <div class="flex gap-4">
             <a href="/">Home</a>
             @foreach ($categories as $category)

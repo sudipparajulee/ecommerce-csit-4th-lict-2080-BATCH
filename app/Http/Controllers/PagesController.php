@@ -41,4 +41,11 @@ class PagesController extends Controller
         $orders = Order::where('user_id', auth()->id())->latest()->get();
         return view('myorders', compact('orders'));
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $products = Product::where('name', 'like', '%' . $search . '%')->get();
+        return view('search',compact('products'));
+    }
 }
