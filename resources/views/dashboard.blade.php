@@ -12,11 +12,11 @@
         </div>
         <div class="bg-green-100 p-4 rounded-lg shadow">
             <h2 class="font-bold text-xl">Total Orders</h2>
-            <p class="text-3xl font-bold">120</p>
+            <p class="text-3xl font-bold">{{$totalorders}}</p>
         </div>
         <div class="bg-yellow-100 p-4 rounded-lg shadow">
             <h2 class="font-bold text-xl">Pending Orders</h2>
-            <p class="text-3xl font-bold">44</p>
+            <p class="text-3xl font-bold">{{$pendingorders}}</p>
         </div>
         <div class="bg-green-100 p-4 rounded-lg shadow">
             <h2 class="font-bold text-xl">Processing Orders</h2>

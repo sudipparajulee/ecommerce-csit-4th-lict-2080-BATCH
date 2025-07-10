@@ -66,6 +66,20 @@ class OrderController extends Controller
     {
         $order = Order::find($orderid);
         $order->payment_status = $status == 'Delivered' ? 'Paid' : 'Pending';
+        //update the stock
+        if(($order->order_status == 'Pending' || $order->order_status == 'Cancelled') && ($status == 'Processing' || $status == 'Delivered') )
+        {
+            //decrease the stock
+            $order->product->stock -= $order->quantity;
+            $order->product->save();
+        }
+        //if it is back to pending or cancelled, increase the stock
+        if(($order->order_status == 'Processing' || $order->order_status == 'Delivered') && ($status == 'Pending' || $status == 'Cancelled') )
+        {
+            //increase the stock
+            $order->product->stock += $order->quantity;
+            $order->product->save();
+        }
         $order->order_status = $status;
         $order->save();
         //send email notification
