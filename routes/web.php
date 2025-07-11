@@ -7,12 +7,14 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[PagesController::class, 'index']);
 Route::get('/viewproduct/{id}', [PagesController::class, 'viewproduct'])->name('viewproduct');
 Route::get('/categoryproducts/{id}', [PagesController::class, 'categoryproducts'])->name('categoryproducts');
 Route::get('/search', [PagesController::class, 'search'])->name('search');
+Route::get('/search-suggestions', [PagesController::class, 'searchSuggestions'])->name('search.suggestions');
 
 Route::middleware('auth')->group(function(){
     Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
@@ -26,6 +28,12 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/myorders', [PagesController::class, 'myorder'])->name('myorders');
     Route::post('/order/cancel/{orderid}', [OrderController::class, 'cancelorder'])->name('order.cancel');
+
+    // Rating routes
+    Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
+    Route::get('/products/{product}/ratings', [RatingController::class, 'getProductRatings'])->name('ratings.product');
+    Route::get('/products/{product}/user-rating', [RatingController::class, 'getUserRating'])->name('ratings.user');
+    Route::delete('/ratings/{rating}', [RatingController::class, 'destroy'])->name('ratings.destroy');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'isadmin'])->name('dashboard');

@@ -48,4 +48,29 @@ class PagesController extends Controller
         $products = Product::where('name', 'like', '%' . $search . '%')->get();
         return view('search',compact('products'));
     }
+
+    public function searchSuggestions(Request $request)
+    {
+        $query = $request->input('query');
+
+        if (strlen($query) < 2) {
+            return response()->json([]);
+        }
+
+        $products = Product::where('name', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->take(8)
+            ->get(['id', 'name', 'price', 'photopath'])
+            ->map(function ($product) {
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'image' => $product->photopath ? asset('images/products/' . $product->photopath) : null,
+                    'url' => route('viewproduct', $product->id)
+                ];
+            });
+
+        return response()->json($products);
+    }
 }
